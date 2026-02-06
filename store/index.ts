@@ -6,7 +6,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['favorites'], // Was 'wishlist', whitelist is a redux-persist config often used, or explicit key match
+  whitelist: ['favorites'],
 };
 
 const rootReducer = combineReducers({

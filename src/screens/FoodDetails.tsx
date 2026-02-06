@@ -1,11 +1,4 @@
-import React, { useState } from 'react';
-import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { FoodItem } from '../../services/food/types';
 import { RootState } from '../../store';
@@ -35,7 +28,10 @@ export function FoodDetailsScreen({ route }: any) {
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 40 }}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: 40 }}
+    >
       {/* Fallback or main image */}
       <Image
         source={{ uri: item.mainImage || item.thumbNailImage }}
@@ -44,16 +40,26 @@ export function FoodDetailsScreen({ route }: any) {
 
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.brand}>{item.cuisine} • {item.category}</Text>
+        <Text style={styles.brand}>
+          {item.cuisine} • {item.category}
+        </Text>
 
         <Text style={styles.price}>
           ₹{item.price}{' '}
-          <Text style={{ fontSize: 14, color: item.isVeg ? 'green' : 'red', fontWeight: 'bold' }}>
+          <Text
+            style={{
+              fontSize: 14,
+              color: item.isVeg ? 'green' : 'red',
+              fontWeight: 'bold',
+            }}
+          >
             ({item.isVeg ? 'VEG' : 'NON-VEG'})
           </Text>
         </Text>
 
-        <Text style={styles.rating}>⭐ {item.rating} • 🕒 {item.prepTimeMins} mins</Text>
+        <Text style={styles.rating}>
+          ⭐ {item.rating} • 🕒 {item.prepTimeMins} mins
+        </Text>
 
         <TouchableOpacity
           style={styles.favoritesButton}

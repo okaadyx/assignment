@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { api } from '../../services';
 import { FoodItem } from '../../services/food/types';
 import { useNavigation } from '@react-navigation/native';
@@ -31,7 +26,7 @@ export function CategoryScreen({ route }: any) {
       // Since API doesn't support category filter, we fetch all and filter locally
       const allFood = await api.food.getFoodList();
       const filtered = allFood.filter(
-        item => item.category.toLowerCase() === categoryName.toLowerCase()
+        item => item.category.toLowerCase() === categoryName.toLowerCase(),
       );
       setProducts(filtered);
     } catch (error: any) {
