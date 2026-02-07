@@ -21,7 +21,9 @@ The app is built to simulate a real-world e-commerce or food delivery experience
 
 ## 🚀 How to Run
 
-**APK Download:** [Get the latest build here](https://drive.google.com/file/d/1hyt5aVTmR6ShYbq22XrSiaKVCMCkbohD/view?usp=drive_link)
+**APK Download:** [Get the latest build here](https://drive.google.com/file/d/1Vx4Hz4SmY5mFGjv1hVAWHBuLFPMZj7Nd/view?usp=sharing)
+
+**Demo Video:** [Watch the demo here](https://drive.google.com/file/d/1VBV__C4LAr_g6dY7yauDIkVObZ4MlIBQ/view?usp=sharing)
 
 ### Prerequisites
 
