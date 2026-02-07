@@ -1,5 +1,9 @@
 # Food Catalog App
 
+![Platform](https://img.shields.io/badge/platform-android%20|%20ios-lightgrey)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-active-success)
+
 A robust React Native mobile application for browsing, searching, and managing a catalog of food items. This app demonstrates modern mobile development practices using TypeScript, Redux Toolkit, and React Query.
 
 ## App Overview
@@ -13,92 +17,156 @@ The **Food Catalog App** allows users to:
 
 The app is built to simulate a real-world e-commerce or food delivery experience, using a static API configuration (JsonBin) to mock backend interactions.
 
-## Architecture
+---
 
-The application follows a clean, modular architecture:
+## 🚀 How to Run
 
-### 1. Service Layer (`services/`)
-- **API Handling**: Centralized in `services/food/index.ts`.
-- **Data Source**: Fetches data from a configured JsonBin endpoint, simulating a REST API.
-- **React Query**: utilized via `useFoodList` hook to manage server state, caching, and background updates.
+**APK Download:** [Get the latest build here](https://drive.google.com/file/d/1hyt5aVTmR6ShYbq22XrSiaKVCMCkbohD/view?usp=drive_link)
 
-### 2. State Management (`store/`)
-- **Redux Toolkit**: Manages global client state.
-- **Favorites Slice**: Handles `addToFavorites`, `removeFromFavorites`, and `toggleFavorites` actions.
-- **Persistence**: `redux-persist` saves the `favorites` slice to `AsyncStorage`, ensuring user data survives app restarts.
+### Prerequisites
 
-### 3. UI Components (`src/components/`)
-- **Atomic Design**: Small, reusable components like `FoodCard` are used across multiple screens.
-- **FoodCard**: 
-    - Display: Thumbnail, Title, Cuisine, Price.
-    - Logic: Visual indicators for Veg (Green) vs Non-Veg (Red).
-    - Interaction: Heart icon for toggling favorites directly from the card.
+Ensure you have the following installed on your machine:
 
-## Features Deep Dive
+- **Node.js** (v20 or higher)
+- **React Native CLI**: `npm install -g react-native-cli`
+- **Java Development Kit (JDK)**: v17 recommended
+- **Android Studio** (for Android development)
+- **Xcode** (macOS only, for iOS development)
+
+**Project Dependencies:**
+- React Native: 0.83.1
+- React: 19.2.0
+- TypeScript: 5.8.3
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/okaadyx/test-assignment
+   cd test-assignment
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Install iOS pods (macOS only):**
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+### Running the App
+
+#### Android
+1. Start Metro Bundler:
+   ```bash
+   npm start
+   ```
+2. Launch App:
+   ```bash
+   npx react-native run-android
+   ```
+
+#### iOS
+1. Start Metro Bundler:
+   ```bash
+   npm start
+   ```
+2. Launch App:
+   ```bash
+   npx react-native run-ios
+   ```
+
+### Troubleshooting
+- **Metro Cache**: `npm start -- --reset-cache`
+- **Android Build**: `cd android && ./gradlew clean && cd ..`
+- **iOS Build**: Delete `ios/Pods` & `Podfile.lock`, then `pod install`.
+
+---
+
+## 🏗 Architecture
+
+The application is structured around a clean, modular architecture that separates concerns for maintainability and scalability.
+
+```
+App
+├── UI Layer (Screens & Components)
+├── State Management (Redux Toolkit)
+├── Data Layer (React Query & Axios)
+└── Service Layer (API Definition)
+```
+
+### Key Components
+
+1.  **Service Layer (`services/`)**
+    *   **Abstraction**: A dedicated `FoodApi` class handles all network requests.
+    *   **Mock Backend**: Connects to JsonBin to simulate real-world REST interactions.
+    *   **Caching**: `React Query` manages caching, background refetches, and server state synchronization.
+
+2.  **State Management (`store/`)**
+    *   **Client State**: Redux Toolkit manages global UI state (Favorites).
+    *   **Persistence**: `redux-persist` ensures the Favorites list survives app restarts using `AsyncStorage`.
+
+3.  **UI Architecture (`src/components/`)**
+    *   **Atomic Design**: Reusable atoms (buttons, icons) and molecules (FoodCard).
+    *   **Performance**: Components utilize `React.memo` and FlatList optimizations for smooth scrolling.
+
+## 🛠 Tech Stack
+
+| Category | Technology | Purpose |
+|----------|------------|---------|
+| **Core** | React Native 0.83 | Cross-platform mobile framework |
+| **Language** | TypeScript 5.8 | Static typing and type safety |
+| **State** | Redux Toolkit | Global client state management |
+| **Persistence** | Redux Persist | Local storage for user data |
+| **Networking** | Axios + React Query | API fetching and server state management |
+| **Navigation** | React Navigation v7 | Native stack and tab routing |
+| **UI** | Vector Icons | Iconography |
+
+## ✨ Features Deep Dive
 
 ### 🏠 Home Tab
-- **Grid Layout**: Displays food items in a responsive 2-column grid.
-- **Performance**: Optimized rendering for smooth scrolling.
+- **Infinite Scroll**: Efficiently renders large lists of items.
+- **Optimized Images**: Handles remote image loading gracefully.
 
 ### 🔍 Search Tab
-- **Client-Side Filtering**: Fetches the full dataset once and performs real-time filtering using `useMemo` for instant feedback.
-- **Category Discovery**: Displays available categories when the search bar is empty.
+- **Client-Side Search**: Leverages local filtering for zero-latency search results.
+- **Dynamic Categories**: Automatically aggregates categories from the dataset.
 
-### ❤️ Favorites Tab
-- **Persistence**: Saved items are stored locally.
-- **Management**: Users can remove items directly from this list.
+### ❤️ Favorites System
+- **Real-time Toggle**: Add/remove items instantly from any screen.
+- **Persistent Storage**: Uses AsyncStorage json-storage backend.
 
-### 📄 Food Details
-- **Rich Information**: Shows high-resolution images and detailed metadata.
-- **Navigation**: smooth transition from listing screens.
+## 📂 Project Structure
 
-## Technical Decisions
-
-- **Why React Query?** 
-  - To separate **Server State** (food list) from **Client State** (favorites).
-  - Provides out-of-the-box caching and loading states (`isLoading`).
-
-- **Why Redux Toolkit?**
-  - Simplifies Redux logic, reducing boilerplate for the Favorites feature.
-  - Built-in immutability handling (Immer) makes state updates safer.
-
-- **Why Client-Side Search?**
-  - For this dataset size, client-side filtering offers superior responsiveness (zero latency) compared to server-side search.
-
-## Technologies
-
-- **Core**: React Native 0.83, TypeScript 5.8
-- **State**: Redux Toolkit, Redux Persist
-- **Data**: Axios, TanStack React Query
-- **Navigation**: React Navigation v7 (Native Stack & Bottom Tabs)
-- **UI**: React Native Vector Icons, Safe Area Context
-
-## Project Structure
-
-```
+```bash
 testing/
 ├── src/
-│   ├── components/
-│   │   ├── FoodCard.tsx       # Main product display component
-│   │   ├── CategoryComponent.tsx
-│   │   └── ...
-│   ├── screens/
-│   │   ├── tabs/
-│   │   │   ├── SearchScreen.tsx  # Implements client-side search logic
-│   │   │   └── Favorites.tsx     # Connects to Redux store
-│   │   └── ...
-│   ├── navigation/            # Stack & Tab configurations
-│   └── ...
-├── services/
-│   └── food/                  # API definitions
-├── store/
-│   └── FavoritesSlice.ts      # Redux logic for favorites
-└── ...
+│   ├── components/       # Shared UI components (FoodCard, CategoryComponent)
+│   ├── screens/          # Application screens
+│   │   ├── tabs/         # Tab Navigator screens (Home, Search, Favorites)
+│   │   └── ...           # Stack screens (Details, Welcome)
+│   ├── navigation/       # Navigation configuration
+│   ├── styles/           # Global styles and themes
+│   └── constants/        # App constants (Colors, API URLs)
+├── services/             # API services and types
+├── store/                # Redux store setup
+├── android/              # Native Android code
+└── ios/                  # Native iOS code
 ```
 
-## How to Run
+## 🤝 Contributing
 
-1. **Install Dependencies**: `npm install`
-2. **iOS Setup**: `cd ios && pod install`
-3. **Run Android**: `npm start` in one terminal, `npx react-native run-android` in another.
-4. **Run iOS**: `npm start` in one terminal, `npx react-native run-ios` in another.
+Contributions are welcome! Please follow these steps:
+1. Fork the project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
