@@ -25,7 +25,7 @@ export const homeScreenStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   offlineBanner: {
-    backgroundColor: '#1d6ca7',
+    backgroundColor: '#E53935',
     padding: 8,
     // marginBottom: 2,
     width: '100%',

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FoodItem } from '../../services/food/types';
 import { RootState } from '../../store';
 import { toggleFavorites } from '../../store/FavoritesSlice';
-import { productDetailsScreenStyles as styles } from '../styles/productDetailsScreenStyles';
+import { foodDetailsScreenStyles as styles } from '../styles/foodDetailsScreenStyles';
 
 export function FoodDetailsScreen({ route }: any) {
   const item: FoodItem = route.params?.item;

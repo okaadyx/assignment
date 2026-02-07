@@ -9,13 +9,13 @@ import { categoryScreenStyles as styles } from '../styles/categoryScreenStyles';
 
 export function CategoryScreen({ route }: any) {
   const categoryName: string | undefined = route.params?.category;
-  const [products, setProducts] = useState<FoodItem[]>([]);
+  const [foodItems, setFoodItems] = useState<FoodItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
 
-  const loadProducts = async () => {
+  const loadFoodItems = async () => {
     if (!categoryName) {
       setLoading(false);
       return;
@@ -28,7 +28,7 @@ export function CategoryScreen({ route }: any) {
       const filtered = allFood.filter(
         item => item.category.toLowerCase() === categoryName.toLowerCase(),
       );
-      setProducts(filtered);
+      setFoodItems(filtered);
     } catch (error: any) {
       console.log('Error fetching category items:', error.message);
     } finally {
@@ -37,7 +37,7 @@ export function CategoryScreen({ route }: any) {
   };
 
   useEffect(() => {
-    loadProducts();
+    loadFoodItems();
   }, [categoryName]);
 
   if (!categoryName) {
@@ -56,7 +56,7 @@ export function CategoryScreen({ route }: any) {
     );
   }
 
-  if (!products.length) {
+  if (!foodItems.length) {
     return (
       <View style={styles.emptyContainer}>
         <Text>No items found</Text>
@@ -67,7 +67,7 @@ export function CategoryScreen({ route }: any) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={products}
+        data={foodItems}
         keyExtractor={item => String(item.id)}
         numColumns={2}
         showsVerticalScrollIndicator={false}
