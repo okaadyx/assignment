@@ -6,10 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 import { FoodCard } from '../../components';
 import { homeScreenStyles as styles } from '../../styles/homeScreenStyles';
 import { queryClient } from '../../../lib/QueryClient';
+import useInternetStatus from '../../components/useInternetStatus';
 
 export function HomeScreen() {
   const { data: foodItems = [], isLoading, isFetching } = useFoodList();
 
+  const isOnline = useInternetStatus();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
 
@@ -23,6 +25,11 @@ export function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      {!isOnline && (
+        <View style={styles.offlineBanner}>
+          <Text style={styles.offlineText}>You’re offline</Text>
+        </View>
+      )}
       <FlatList
         data={foodItems}
         keyExtractor={item => String(item.id)}

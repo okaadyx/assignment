@@ -24,5 +24,15 @@ export const homeScreenStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  offlineBanner: {
+    backgroundColor: '#1d6ca7',
+    padding: 8,
+    // marginBottom: 2,
+    width: '100%',
+    alignItems: 'center',
+  },
+  offlineText: {
+    color: '#e4e4e4',
+    fontWeight: '600',
+  },
 });
-
